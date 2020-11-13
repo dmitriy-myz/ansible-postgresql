@@ -1,0 +1,3 @@
+pg_version: 13
+pg_client_only: False
+pg_conf_dir: /etc/postgresql/{{ pg_version }}/main/conf.d 
