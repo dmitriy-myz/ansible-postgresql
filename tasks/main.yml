@@ -31,6 +31,9 @@
       - postgresql-client-{{ pg_version }}
   when: pg_client_only
 
+- include_tasks: config.yml
+  when: not pg_client_only
+
 - name: ensure postgresql is started
   service: name=postgresql state=started
   when: not pg_client_only

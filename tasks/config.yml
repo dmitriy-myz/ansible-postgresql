@@ -1,0 +1,6 @@
+- name: put custom PostgreSQL params
+  template:
+    src: custom.conf
+    dest: '{{ pg_conf_dir }}/custom.conf'
+  notify: postgresql restart
+
