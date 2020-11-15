@@ -1,0 +1,15 @@
+
+- name: create PostgreSQL user
+  become: yes
+  become_user: postgres
+  postgresql_user: name={{ pg_user }} password={{ pg_user_pwd }}
+
+- name: create DB
+  become: yes
+  become_user: postgres
+  postgresql_db: name={{ pg_db_name }} encoding="UTF-8" lc_collate="ru_RU.UTF-8" lc_ctype="ru_RU.UTF-8" template=template0 owner={{ pg_user }}
+
+- name: create pg_stat_statements extension in DB
+  become: yes
+  become_user: postgres
+  postgresql_ext: db={{ pg_db_name }} name=pg_stat_statements

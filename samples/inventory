@@ -1,0 +1,10 @@
+db-01 ansible_host=ip_or_host
+db-02 ansible_host=ip_or_host
+db-03 ansible_host=ip_or_host
+
+
+[postgresql]
+db-01
+db-02
+db-03
+
