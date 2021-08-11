@@ -1,10 +1,12 @@
 ---
 - include_tasks: install.yml
+  when: pg_install
   tags: ["install", "initial-setup"]
 
 
 - include_tasks: config.yml
   when: not pg_client_only
+  tags: ["configure"]
 
 - name: ensure postgresql is started
   service: name=postgresql state=started
