@@ -7,7 +7,9 @@ pg_conf_dir: /etc/postgresql/{{ pg_version }}/main/conf.d
 
 
 # configs
-pg_configs:
+#pg_configs:
+
+playbook_default_pg_configs:
   listen_addresses: '''127.0.0.1'''
   max_connections: '800'
   shared_buffers: '4096MB'
