@@ -1,5 +1,5 @@
 # Descrition
-This role installs and configures encrypted cockroach cluster db.
+This role installs and configures postgresql db.
 See samples directory
 
 
