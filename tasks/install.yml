@@ -1,0 +1,43 @@
+---
+- name: add pg apt key
+  apt_key:
+    url: https://www.postgresql.org/media/keys/ACCC4CF8.asc
+    state: present
+  tags: ["install", "initial-setup"]
+
+- name: add pg apt repo
+  apt_repository:
+    repo: 'deb http://apt.postgresql.org/pub/repos/apt/ {{ ansible_distribution_release }}-pgdg main'
+    state: present
+    update_cache: True
+  tags: ["install", "initial-setup"]
+
+
+- name: apt update
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+  ignore_errors: True
+  tags: ["install", "initial-setup"]
+
+- name: install postgresql-{{ pg_version }} packages
+  apt:
+    name:
+      - postgresql-{{ pg_version }}
+      - postgresql-contrib-{{ pg_version }}
+      - postgresql-client-{{ pg_version }}
+  when: not pg_client_only
+  tags: ["install", "initial-setup"]
+
+- name: install postgresql-client only
+  apt:
+    name:
+      - postgresql-client-{{ pg_version }}
+  when: pg_client_only
+  tags: ["install", "initial-setup"]
+
+- name: ensure postgresql is started
+  service: name=postgresql state=started
+  when: not pg_client_only
+  tags: ["install", "initial-setup"]
+
